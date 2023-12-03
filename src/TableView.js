@@ -308,8 +308,14 @@ class TableView extends React.Component {
                     </Modal>
                     <div style={{ marginTop: '10px', textAlign: 'center' }}>
                         <Button className={'jump-button'} onClick={this.handleJumpToFirst}>First Page</Button>
-                        <Button className={'jump-button'} onClick={this.handlePaginationChange.bind(this, pagination.current - 1)}>Previous Page</Button>
-                        <Button className={'jump-button'} onClick={this.handlePaginationChange.bind(this, pagination.current + 1)}>Next Page</Button>
+                        <Button className={'jump-button'} disabled={pagination.current === 1}
+                                onClick={this.handlePaginationChange.bind(this, pagination.current - 1)}>
+                            Previous Page
+                        </Button>
+                        <Button className={'jump-button'} disabled={pagination.current === Math.ceil(pagination.total/pagination.pageSize)}
+                                onClick={this.handlePaginationChange.bind(this, pagination.current + 1)}>
+                            Next Page
+                        </Button>
                         <Button className={'jump-button'} onClick={this.handleJumpToLast}>Last Page</Button>
                     </div>
 
