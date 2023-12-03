@@ -24,7 +24,12 @@ class TableView extends React.Component {
 
     componentDidMount() {
         this.fetchData();
+    }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevState.searchText !== '' && this.state.searchText === '') {
+            this.filterData()
+        }
     }
 
     fetchData = () => {
@@ -40,14 +45,14 @@ class TableView extends React.Component {
                 const totalItems = updatedData.length;
                 this.setState({
                     data: updatedData,
-                    filteredData: updatedData.slice(0, 10),
+                    filteredData: updatedData,
                     isFetched: false,
                     pagination: {
                         ...this.state.pagination,
                         total: totalItems
                     }
                 });
-            })
+            }).then(() => this.filterData())
             .catch(error => {
                 console.log(error);
                 this.setState({ isFetched: false });
@@ -281,7 +286,9 @@ class TableView extends React.Component {
                         rowSelection={rowSelection}/>
                     {selectedRowKeys.length > 0 && (
                         <div style={{ marginTop: 16, textAlign: 'right' }}>
-                            {`${selectedRowKeys.length} row${selectedRowKeys.length > 1 ? 's' : ''} selected out of ${filteredData.length} rows`}
+                            {`${selectedRowKeys.length} row${selectedRowKeys.length > 1 ? 's' : ''} selected out of ${filteredData.length} 
+                            
+                            rows`}
                         </div>
                     )}
                     <Pagination
