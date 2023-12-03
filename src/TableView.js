@@ -279,6 +279,11 @@ class TableView extends React.Component {
                         columns={columns}
                         pagination={false}
                         rowSelection={rowSelection}/>
+                    {selectedRowKeys.length > 0 && (
+                        <div style={{ marginTop: 16, textAlign: 'right' }}>
+                            {`${selectedRowKeys.length} row${selectedRowKeys.length > 1 ? 's' : ''} selected out of ${filteredData.length} rows`}
+                        </div>
+                    )}
                     <Pagination
                         current={pagination.current}
                         pageSize={pagination.pageSize}
