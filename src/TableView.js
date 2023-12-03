@@ -45,7 +45,7 @@ class TableView extends React.Component {
                 const totalItems = updatedData.length;
                 this.setState({
                     data: updatedData,
-                    filteredData: updatedData.slice(10),
+                    filteredData: updatedData.slice(0, 10),
                     isFetched: false,
                     pagination: {
                         ...this.state.pagination,
